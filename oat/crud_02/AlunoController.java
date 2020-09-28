@@ -10,7 +10,7 @@ public class AlunoController implements IAluno {
     private List<Aluno> alunos = new ArrayList<Aluno>();
 
     @Override
-    public Aluno criarAluno(Aluno aluno) {
+    public void criarAluno(Aluno aluno) {
 
         //Gerar uma nova matricula para o aluno
         aluno.setMatricula();
@@ -20,9 +20,6 @@ public class AlunoController implements IAluno {
 
         //Mensagem de sucesso
         System.out.println("\n\nAluno adicionado com sucesso!\n\n");
-
-        //Retorna o aluno criado
-        return aluno;
     }
 
     @Override
@@ -40,7 +37,7 @@ public class AlunoController implements IAluno {
     }
 
     @Override
-    public Aluno atualizarAluno(Aluno aluno) {
+    public void atualizarAluno(Aluno aluno) {
         //Objeto para entrada de dados
         Scanner scanner = new Scanner(System.in);
 
@@ -53,9 +50,6 @@ public class AlunoController implements IAluno {
 
         //Mensagem de sucesso
         System.out.println("\n\nAluno atualizado com sucesso!\n\n");
-
-        //Retorna o aluno atualizado
-        return aluno;
     }
 
     @Override

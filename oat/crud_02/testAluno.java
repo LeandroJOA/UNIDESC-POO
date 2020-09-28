@@ -15,7 +15,7 @@ public class testAluno {
 
         //Menu de seleção
         do {
-            System.out.println("====MENU DE OPÇÕES====");
+            System.out.println("\n====MENU DE OPÇÕES====\n");
             System.out.println("1) Adicionar novo aluno!");
             System.out.println("2) Buscar aluno!");
             System.out.println("3) Atualizar aluno!");
