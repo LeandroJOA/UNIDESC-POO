@@ -2,6 +2,7 @@ package br.edu.unidesc.exercicio.oat.crud_02;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
 
@@ -41,6 +42,7 @@ public class Aluno {
     }
 
     public void setMatricula() {
+
         //Parte 1 - Geração da data da matricula
         Date date = new Date();
 
@@ -52,19 +54,24 @@ public class Aluno {
         Random random = new Random();
 
         //Formula para valores entre 1 e 100: ((max - min) + 1) + min;
-        Integer aleatorio = random.nextInt((100 - 1) + 1) + 1;
+        Integer aleatorio = random.nextInt((99 - 1) + 1) + 1;
 
         //Formatação do codigo para dois digitos
         String codigo = String.format("%02d", aleatorio);
 
-        //Parte 3 - Geração do semestre da matricula (SS)
-        //Formula para valores 1 ou 2: ((max - min) + 1) + min;
-        aleatorio = random.nextInt((2 - 1) + 1) + 1;
+        //Parte 3 - Geração do codigo do semestre
+        LocalDateTime dateTime = LocalDateTime.now();
+        //Captura do mes atual
+        int mes = dateTime.getMonthValue();
 
-        //Formatação do semestre para dois digitos
-        String semetre = String.format("%02d", aleatorio);
+        //Inicialização do codigo do semestre
+        String semestre = "01";
+
+        //Verificação caso o mês seja após junho
+        if (mes > 6)
+            semestre = "02";
 
         //Parte 4 - Geração da matricula com data + codigo + semestre (YYYYMMddHHmmss-RR-SS)
-        this.matricula = dataMatricula + "-" + codigo + "-" + semetre;
+        this.matricula = dataMatricula + "-" + codigo + "-" + semestre;
     }
 }
