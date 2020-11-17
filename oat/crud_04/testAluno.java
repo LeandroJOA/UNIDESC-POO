@@ -1,7 +1,7 @@
-package br.edu.unidesc.exercicio.oat.crud_03;
+package br.edu.unidesc.exercicio.oat.crud_04;
 
-import br.edu.unidesc.exercicio.oat.crud_03.controller.AlunoController;
-import br.edu.unidesc.exercicio.oat.crud_03.entidades.Aluno;
+import br.edu.unidesc.exercicio.oat.crud_04.controller.AlunoController;
+import br.edu.unidesc.exercicio.oat.crud_04.entidades.Aluno;
 
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ public class testAluno {
         int quantAluno;
         String op, temp, conteudo;
 
-        Aluno aluno = new Aluno();
+        Aluno aluno;
         Scanner scanner = new Scanner(System.in);
         AlunoController controller = new AlunoController();
 
@@ -55,62 +55,56 @@ public class testAluno {
                         //Mensagem de sucesso
                         System.out.println("\n\nAluno adicionado com sucesso!\n\n");
                     }
-                    System.out.println("\n\nArquivo 'alunos' criado com sucesso!\n\n");
                     break;
                 //Buscar alunos!
                 case "2":
+                    System.out.println("Informe o CPF do aluno deseja buscar: ");
                     //Chamada do metodo READ
-                    conteudo = controller.lerAluno();
+                    conteudo = controller.lerAluno(scanner.nextLine());
                     //Verificando se o arquivo para leitura foi encontrado
                     if (conteudo != null) {
-                        System.out.println("\n\nArquivo 'alunos' encontrado com sucesso:\n\n");
+                        //Mensagem de sucesso
+                        System.out.println("\n\nAluno encontrado com sucesso:\n\n");
+                        //Imprimindo conteudo encontrado
                         System.out.println(conteudo);
                     } else
-                        System.out.println("\n\nERROR arquivo não existente\n\n");
+                        //Mensagem de erro
+                        System.out.println("\n\nERROR CPF invalido ou inexistente\n\n");
                     break;
                 //Atualizar alunos!;
                 case "3":
-                    //Verificando se o arquivo 'alunos' já existe
-                    if (controller.lerAluno() != null) {
-                        //Deletando arquivo existente
-                        controller.deletarAluno();
+                    System.out.println("Informe o CPF do aluno deseja atualizar: ");
+                    String cpf = scanner.nextLine();
+                    //Verificando se existe algum aluno com este CPF
+                    if (controller.lerAluno(cpf) != null) {
+                        //Capturando novos dados
+                        System.out.println("Informe o novo Nome: ");
+                        String nome = scanner.nextLine();
+                        System.out.println("Informe o novo Curso: ");
+                        String curso = scanner.nextLine();
 
-                        //Gerando novo arquivo
-                        System.out.println("Quantos novos alunos deseja adicionar? ");
-                        temp = scanner.nextLine();
-                        quantAluno = Integer.parseInt(temp);
-
-                        //Repetição para cada novo aluno
-                        for (int i = 0; i < quantAluno; i++) {
-                            //Reset do aluno
-                            aluno = new Aluno();
-
-                            System.out.println("Informe o Nome: ");
-                            aluno.setNome(scanner.nextLine());
-                            System.out.println("Informe o CPF: ");
-                            aluno.setCpf(scanner.nextLine());
-                            System.out.println("Informe o Curso: ");
-                            aluno.setCurso(scanner.nextLine());
-
-                            //Chamada do metodo UPDATE
-                            controller.atualizarAluno(aluno);
-
-                            //Mensagem de sucesso
-                            System.out.println("\n\nAluno adicionado com sucesso!\n\n");
-                        }
+                        //Chamada do metodo UPDATE
+                        controller.atualizarAluno(cpf, nome, curso);
 
                         //Mensagem de sucesso
-                        System.out.println("\n\nArquivo 'alunos' alterado com sucesso!\n\n");
+                        System.out.println("\n\nAluno atualizado com sucesso!\n\n");
                     } else
+                        //Mensagem de erro
                         System.out.println("\n\nERROR arquivo não existente\n\n");
                     break;
                 //Deletar alunos!
                 case "4":
-                    //Verificando se o arquivo para exclusão foi encontrado
-                    if (controller.deletarAluno())
-                        System.out.println("\n\nArquivo 'alunos' deletado com sucesso!\n\n");
-                    else
-                        System.out.println("\n\nERROR arquivo não existente\n\n");
+                    System.out.println("Informe o CPF do aluno deseja atualizar: ");
+                    cpf = scanner.nextLine();
+                    //Verificando se existe algum aluno com este CPF
+                    if (controller.lerAluno(cpf) != null) {
+                        //Chamada do metodo DELETE
+                        controller.deletarAluno(cpf);
+                        System.out.println("\n\nAluno deletado com sucesso!\n\n");
+                    } else {
+                        //Mensagem de erro
+                        System.out.println("\n\nERROR CPF invalido ou inexistente\n\n");
+                    }
                     break;
                 //Nenhuma das opções
                 default:

@@ -1,4 +1,4 @@
-package br.edu.unidesc.exercicio.oat.crud_03.entidades;
+package br.edu.unidesc.exercicio.oat.crud_04.entidades;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
